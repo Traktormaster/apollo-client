@@ -8,7 +8,7 @@ function deepFreeze(value: any) {
   const workSet = new Set([value]);
   workSet.forEach(obj => {
     if (isObject(obj)) {
-      if (!Object.isFrozen(obj)) Object.freeze(obj);
+      if (!Object.isFrozen(obj) && !(obj instanceof Uint8Array)) Object.freeze(obj);
       Object.getOwnPropertyNames(obj).forEach(name => {
         if (isObject(obj[name])) workSet.add(obj[name]);
       });
